@@ -7,8 +7,10 @@ public class FLuxAndmonoTest {
 
   @Test
   public void fulxTest() {
-    Flux<String> stringFlux = Flux.just("Spring", "Spring Boot", "Reactive Spring");
+    Flux<String> stringFlux = Flux.just("Spring", "Spring Boot", "Reactive Spring")
+      .concatWith(Flux.error(new RuntimeException("Exception Occurred")));
 
-    stringFlux.subscribe(System.out::println);
+    stringFlux.subscribe(System.out::println,
+      (e)-> System.err.println(e));
   }
 }
