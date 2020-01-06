@@ -11,7 +11,7 @@ public class FluxAndMonoTest {
   public void fluxTest() {
 
     Flux<String> stringFlux = Flux.just("Spring", "Spring Boot", "Reactive Spring")
-      /*.concatWith(Flux.error(new RuntimeException("Exception Occurred")))*/
+//      .concatWith(Flux.error(new RuntimeException("Exception Occurred")))
       .concatWith(Flux.just("After Error"))
       .log();
 
@@ -62,7 +62,7 @@ public class FluxAndMonoTest {
       .log();
 
     StepVerifier.create(stringFlux)
-      .expectNext("Spring","Spring Boot","Reactive Spring")
+      .expectNext("Spring", "Spring Boot", "Reactive Spring")
       .expectErrorMessage("Exception Occurred")
       .verify();
 
@@ -85,9 +85,9 @@ public class FluxAndMonoTest {
   }
 
   @Test
-  public void monoTest(){
+  public void monoTest() {
 
-    Mono<String>  stringMono = Mono.just("Spring");
+    Mono<String> stringMono = Mono.just("Spring");
 
     StepVerifier.create(stringMono.log())
       .expectNext("Spring")
@@ -96,7 +96,7 @@ public class FluxAndMonoTest {
   }
 
   @Test
-  public void monoTest_Error(){
+  public void monoTest_Error() {
 
 
     StepVerifier.create(Mono.error(new RuntimeException("Exception Occurred")).log())
